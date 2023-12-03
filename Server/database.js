@@ -101,6 +101,61 @@ export async function eliminarMascotaPorID(idMascota) {
 }
 
 
+//Crear direccion
+export async function crearDireccion(direccion) {
+    try {
+        const result = await pool.query(
+            `INSERT INTO direccion SET ?`,
+            [direccion]
+        );
+        return result.insertId;
+    } catch (error) {
+        console.error('Error al crear una dirección:', error);
+        throw error;
+    }
+}
+
+//Obtener direccion por ID
+export async function getDireccionPorID(idDireccion) {
+    try {
+        const [rows] = await pool.query(
+            `SELECT * FROM direccion WHERE idDireccion = ?`,
+            [idDireccion]
+        );
+        return rows[0];
+    } catch (error) {
+        console.error('Error al obtener una dirección por ID:', error);
+        throw error;
+    }
+}
+
+//Actualizar direccion
+export async function actualizarDireccion(idDireccion, nuevaInfo) {
+    try {
+        const result = await pool.query(
+            `UPDATE direccion SET ? WHERE idDireccion = ?`,
+            [nuevaInfo, idDireccion]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al actualizar una dirección:', error);
+        throw error;
+    }
+}
+
+//Eliminar direccion
+export async function eliminarDireccion(idDireccion) {
+    try {
+        const result = await pool.query(
+            `DELETE FROM direccion WHERE idDireccion = ?`,
+            [idDireccion]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al eliminar una dirección:', error);
+        throw error;
+    }
+}
 
 
 
