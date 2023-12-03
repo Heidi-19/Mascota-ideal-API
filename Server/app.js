@@ -167,6 +167,139 @@ app.delete("/direccion/:idDireccion", async (req, res) => {
     }
 });
 
+//Crear una sesion
+app.post("/sesion", async (req, res) => {
+    const nuevaSesion = req.body; // Suponiendo que los datos de la nueva sesión están en el cuerpo de la solicitud
+    
+    try {
+        const idNuevaSesion = await crearSesion(nuevaSesion);
+        res.status(201).send({ id: idNuevaSesion, mensaje: 'Sesión creada correctamente' });
+    } catch (error) {
+        console.error('Error al crear una nueva sesión:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Obtener sesion por ID
+app.get("/sesion/:idSesion", async (req, res) => {
+    const idSesion = req.params.idSesion;
+    
+    try {
+        const sesion = await getSesionPorID(idSesion);
+        if (sesion) {
+            res.status(200).send(sesion);
+        } else {
+            res.status(404).send('Sesión no encontrada');
+        }
+    } catch (error) {
+        console.error('Error al obtener una sesión por ID:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Actualizar informacion de una sesion por ID
+app.put("/sesion/:idSesion", async (req, res) => {
+    const idSesion = req.params.idSesion;
+    const nuevaInfo = req.body; // Suponiendo que los nuevos datos están en el cuerpo de la solicitud
+    
+    try {
+        const filasAfectadas = await actualizarSesion(idSesion, nuevaInfo);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Sesión actualizada correctamente');
+        } else {
+            res.status(404).send('Sesión no encontrada');
+        }
+    } catch (error) {
+        console.error('Error al actualizar la información de una sesión:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Eliminar una sesion por ID
+app.delete("/sesion/:idSesion", async (req, res) => {
+    const idSesion = req.params.idSesion;
+    
+    try {
+        const filasAfectadas = await eliminarSesion(idSesion);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Sesión eliminada correctamente');
+        } else {
+            res.status(404).send('Sesión no encontrada');
+        }
+    } catch (error) {
+        console.error('Error al eliminar una sesión:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Crear rol
+app.post("/roles", async (req, res) => {
+    const nuevoRol = req.body; // Suponiendo que los datos del nuevo rol están en el cuerpo de la solicitud
+    
+    try {
+        const idNuevoRol = await crearRol(nuevoRol);
+        res.status(201).send({ id: idNuevoRol, mensaje: 'Rol creado correctamente' });
+    } catch (error) {
+        console.error('Error al crear un nuevo rol:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Obtener un rol por ID
+app.get("/roles/:idRol", async (req, res) => {
+    const idRol = req.params.idRol;
+    
+    try {
+        const rol = await getRolPorID(idRol);
+        if (rol) {
+            res.status(200).send(rol);
+        } else {
+            res.status(404).send('Rol no encontrado');
+        }
+    } catch (error) {
+        console.error('Error al obtener un rol por ID:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Actualizar informacion de un rol por ID
+app.put("/roles/:idRol", async (req, res) => {
+    const idRol = req.params.idRol;
+    const nuevaInfo = req.body; // Suponiendo que los nuevos datos están en el cuerpo de la solicitud
+    
+    try {
+        const filasAfectadas = await actualizarRol(idRol, nuevaInfo);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Rol actualizado correctamente');
+        } else {
+            res.status(404).send('Rol no encontrado');
+        }
+    } catch (error) {
+        console.error('Error al actualizar la información de un rol:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Eliminar un rol por ID
+app.delete("/roles/:idRol", async (req, res) => {
+    const idRol = req.params.idRol;
+    
+    try {
+        const filasAfectadas = await eliminarRol(idRol);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Rol eliminado correctamente');
+        } else {
+            res.status(404).send('Rol no encontrado');
+        }
+    } catch (error) {
+        console.error('Error al eliminar un rol:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+
+
+
 
 
 
