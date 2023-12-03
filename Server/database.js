@@ -269,4 +269,175 @@ export async function eliminarRol(idRol) {
     }
 }
 
+//Crear usuario
+export async function crearUsuario(usuario) {
+    try {
+        const result = await pool.query(
+            `INSERT INTO usuario SET ?`,
+            [usuario]
+        );
+        return result.insertId;
+    } catch (error) {
+        console.error('Error al crear un usuario:', error);
+        throw error;
+    }
+}
+
+// Obtener Usuario por Nombre
+export async function getUsuarioPorNombre(nombre) {
+    try {
+        const [rows] = await pool.query(
+            `SELECT * FROM usuario WHERE nombre = ?`,
+            [nombre]
+        );
+        return rows[0];
+    } catch (error) {
+        console.error('Error al obtener un usuario por nombre:', error);
+        throw error;
+    }
+}
+
+//Actualizar usuario
+export async function actualizarUsuario(idUsuario, nuevaInfo) {
+    try {
+        const result = await pool.query(
+            `UPDATE usuario SET ? WHERE idUsuario = ?`,
+            [nuevaInfo, idUsuario]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al actualizar un usuario:', error);
+        throw error;
+    }
+}
+
+//Eliminar usuario
+export async function eliminarUsuario(idUsuario) {
+    try {
+        const result = await pool.query(
+            `DELETE FROM usuario WHERE idUsuario = ?`,
+            [idUsuario]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al eliminar un usuario:', error);
+        throw error;
+    }
+}
+
+//Crear solicitud de adopcion
+export async function crearSolicitudAdopcion(solicitud) {
+    try {
+        const result = await pool.query(
+            `INSERT INTO solicitudesadopcion SET ?`,
+            [solicitud]
+        );
+        return result.insertId;
+    } catch (error) {
+        console.error('Error al crear una solicitud de adopción:', error);
+        throw error;
+    }
+}
+
+//Obtener solicitud de adopcion por ID
+export async function getSolicitudAdopcionPorID(idSolicitud) {
+    try {
+        const [rows] = await pool.query(
+            `SELECT * FROM solicitudesadopcion WHERE idSolicitud = ?`,
+            [idSolicitud]
+        );
+        return rows[0];
+    } catch (error) {
+        console.error('Error al obtener una solicitud de adopción por ID:', error);
+        throw error;
+    }
+}
+
+//Actualizar solicitud de adopcion
+export async function actualizarSolicitudAdopcion(idSolicitud, nuevaInfo) {
+    try {
+        const result = await pool.query(
+            `UPDATE solicitudesadopcion SET ? WHERE idSolicitud = ?`,
+            [nuevaInfo, idSolicitud]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al actualizar una solicitud de adopción:', error);
+        throw error;
+    }
+}
+
+//Eliminar solicitud de adopcion
+export async function eliminarSolicitudAdopcion(idSolicitud) {
+    try {
+        const result = await pool.query(
+            `DELETE FROM solicitudesadopcion WHERE idSolicitud = ?`,
+            [idSolicitud]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al eliminar una solicitud de adopción:', error);
+        throw error;
+    }
+}
+
+//Crear adopcionconfirmada
+export async function crearAdopcionConfirmada(adopcion) {
+    try {
+        const result = await pool.query(
+            `INSERT INTO adopcionconfirmada SET ?`,
+            [adopcion]
+        );
+        return result.insertId;
+    } catch (error) {
+        console.error('Error al crear una adopción confirmada:', error);
+        throw error;
+    }
+}
+
+//Obtener adopcion por ID
+export async function getAdopcionConfirmadaPorID(idAdopcion) {
+    try {
+        const [rows] = await pool.query(
+            `SELECT * FROM adopcionconfirmada WHERE idAdopcion = ?`,
+            [idAdopcion]
+        );
+        return rows[0];
+    } catch (error) {
+        console.error('Error al obtener una adopción confirmada por ID:', error);
+        throw error;
+    }
+}
+
+//Actualizar adopcion
+export async function actualizarAdopcionConfirmada(idAdopcion, nuevaInfo) {
+    try {
+        const result = await pool.query(
+            `UPDATE adopcionconfirmada SET ? WHERE idAdopcion = ?`,
+            [nuevaInfo, idAdopcion]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al actualizar una adopción confirmada:', error);
+        throw error;
+    }
+}
+
+//Eliminar adopcion
+export async function eliminarAdopcionConfirmada(idAdopcion) {
+    try {
+        const result = await pool.query(
+            `DELETE FROM adopcionconfirmada WHERE idAdopcion = ?`,
+            [idAdopcion]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al eliminar una adopción confirmada:', error);
+        throw error;
+    }
+}
+
+
+
+
 
