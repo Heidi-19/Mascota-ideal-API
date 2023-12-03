@@ -2,7 +2,7 @@ CREATE DATABASE bdmascotaideal;
 
 USE bdmascotaideal;
 
-DELETE TABLE usuario (
+CREATE TABLE usuario (
   idUsuario int(8) NOT NULL,
   idRol int(8) NOT NULL,
   nombre varchar(255) NOT NULL,
