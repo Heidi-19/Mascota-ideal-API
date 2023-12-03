@@ -297,10 +297,200 @@ app.delete("/roles/:idRol", async (req, res) => {
     }
 });
 
+//Crear un usuario
+app.post("/usuarios", async (req, res) => {
+    const nuevoUsuario = req.body; // Suponiendo que los datos del nuevo usuario están en el cuerpo de la solicitud
+    
+    try {
+        const idNuevoUsuario = await crearUsuario(nuevoUsuario);
+        res.status(201).send({ id: idNuevoUsuario, mensaje: 'Usuario creado correctamente' });
+    } catch (error) {
+        console.error('Error al crear un nuevo usuario:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
 
+//Obtener un usuario por nombre
+app.get("/usuarios/:nombre", async (req, res) => {
+    const nombre = req.params.nombre;
+    
+    try {
+        const usuario = await getUsuarioPorNombre(nombre);
+        if (usuario) {
+            res.status(200).send(usuario);
+        } else {
+            res.status(404).send('Usuario no encontrado');
+        }
+    } catch (error) {
+        console.error('Error al obtener un usuario por nombre:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
 
+//Actualizar informacion de un usuario
+app.put("/usuarios/:idUsuario", async (req, res) => {
+    const idUsuario = req.params.idUsuario;
+    const nuevaInfo = req.body; // Suponiendo que los nuevos datos están en el cuerpo de la solicitud
+    
+    try {
+        const filasAfectadas = await actualizarUsuario(idUsuario, nuevaInfo);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Usuario actualizado correctamente');
+        } else {
+            res.status(404).send('Usuario no encontrado');
+        }
+    } catch (error) {
+        console.error('Error al actualizar la información de un usuario:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
 
+//Eliminar usuario por ID
+app.delete("/usuarios/:idUsuario", async (req, res) => {
+    const idUsuario = req.params.idUsuario;
+    
+    try {
+        const filasAfectadas = await eliminarUsuario(idUsuario);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Usuario eliminado correctamente');
+        } else {
+            res.status(404).send('Usuario no encontrado');
+        }
+    } catch (error) {
+        console.error('Error al eliminar un usuario:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
 
+//Crear una solicitud de adopcion
+app.post("/solicitudesadopcion", async (req, res) => {
+    const nuevaSolicitud = req.body; // Suponiendo que los datos de la nueva solicitud están en el cuerpo de la solicitud
+    
+    try {
+        const idNuevaSolicitud = await crearSolicitudAdopcion(nuevaSolicitud);
+        res.status(201).send({ id: idNuevaSolicitud, mensaje: 'Solicitud de adopción creada correctamente' });
+    } catch (error) {
+        console.error('Error al crear una nueva solicitud de adopción:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Obtener una solicitud de adopcion por ID
+app.get("/solicitudesadopcion/:idSolicitud", async (req, res) => {
+    const idSolicitud = req.params.idSolicitud;
+    
+    try {
+        const solicitud = await getSolicitudAdopcionPorID(idSolicitud);
+        if (solicitud) {
+            res.status(200).send(solicitud);
+        } else {
+            res.status(404).send('Solicitud de adopción no encontrada');
+        }
+    } catch (error) {
+        console.error('Error al obtener una solicitud de adopción por ID:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Actualizar informacion de una solicitud de adopcion por ID
+app.put("/solicitudesadopcion/:idSolicitud", async (req, res) => {
+    const idSolicitud = req.params.idSolicitud;
+    const nuevaInfo = req.body; // Suponiendo que los nuevos datos están en el cuerpo de la solicitud
+    
+    try {
+        const filasAfectadas = await actualizarSolicitudAdopcion(idSolicitud, nuevaInfo);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Solicitud de adopción actualizada correctamente');
+        } else {
+            res.status(404).send('Solicitud de adopción no encontrada');
+        }
+    } catch (error) {
+        console.error('Error al actualizar la información de una solicitud de adopción:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Eliminar una solicitud de adopcion por ID
+app.delete("/solicitudesadopcion/:idSolicitud", async (req, res) => {
+    const idSolicitud = req.params.idSolicitud;
+    
+    try {
+        const filasAfectadas = await eliminarSolicitudAdopcion(idSolicitud);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Solicitud de adopción eliminada correctamente');
+        } else {
+            res.status(404).send('Solicitud de adopción no encontrada');
+        }
+    } catch (error) {
+        console.error('Error al eliminar una solicitud de adopción:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Crear una adopcion confirmada
+app.post("/adopcionconfirmada", async (req, res) => {
+    const nuevaAdopcion = req.body; // Suponiendo que los datos de la nueva adopción están en el cuerpo de la solicitud
+    
+    try {
+        const idNuevaAdopcion = await crearAdopcionConfirmada(nuevaAdopcion);
+        res.status(201).send({ id: idNuevaAdopcion, mensaje: 'Adopción confirmada creada correctamente' });
+    } catch (error) {
+        console.error('Error al crear una nueva adopción confirmada:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Obtener una adopcion confirmada por ID
+app.get("/adopcionconfirmada/:idAdopcion", async (req, res) => {
+    const idAdopcion = req.params.idAdopcion;
+    
+    try {
+        const adopcion = await getAdopcionConfirmadaPorID(idAdopcion);
+        if (adopcion) {
+            res.status(200).send(adopcion);
+        } else {
+            res.status(404).send('Adopción confirmada no encontrada');
+        }
+    } catch (error) {
+        console.error('Error al obtener una adopción confirmada por ID:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Actualizar informacion de una adopcion confirmada por ID
+app.put("/adopcionconfirmada/:idAdopcion", async (req, res) => {
+    const idAdopcion = req.params.idAdopcion;
+    const nuevaInfo = req.body; // Suponiendo que los nuevos datos están en el cuerpo de la solicitud
+    
+    try {
+        const filasAfectadas = await actualizarAdopcionConfirmada(idAdopcion, nuevaInfo);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Adopción confirmada actualizada correctamente');
+        } else {
+            res.status(404).send('Adopción confirmada no encontrada');
+        }
+    } catch (error) {
+        console.error('Error al actualizar la información de una adopción confirmada:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+//Eliminar una adopcion por ID
+app.delete("/adopcionconfirmada/:idAdopcion", async (req, res) => {
+    const idAdopcion = req.params.idAdopcion;
+    
+    try {
+        const filasAfectadas = await eliminarAdopcionConfirmada(idAdopcion);
+        if (filasAfectadas > 0) {
+            res.status(200).send('Adopción confirmada eliminada correctamente');
+        } else {
+            res.status(404).send('Adopción confirmada no encontrada');
+        }
+    } catch (error) {
+        console.error('Error al eliminar una adopción confirmada:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
 
 
 app.listen(8080, () => {
