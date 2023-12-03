@@ -186,7 +186,9 @@ COMMIT;
 
 
 -- Insertar dos usuario en la tabla usuario --
+-- INSERT INTO --
 
+-- SELECT * FROM TABLE --
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
