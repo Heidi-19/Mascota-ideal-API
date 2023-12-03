@@ -157,5 +157,116 @@ export async function eliminarDireccion(idDireccion) {
     }
 }
 
+//Crear sesion
+export async function crearSesion(sesion) {
+    try {
+        const result = await pool.query(
+            `INSERT INTO sesion SET ?`,
+            [sesion]
+        );
+        return result.insertId;
+    } catch (error) {
+        console.error('Error al crear una sesión:', error);
+        throw error;
+    }
+}
+
+//Obtener sesion por ID
+export async function getSesionPorID(idSesion) {
+    try {
+        const [rows] = await pool.query(
+            `SELECT * FROM sesion WHERE idSesion = ?`,
+            [idSesion]
+        );
+        return rows[0];
+    } catch (error) {
+        console.error('Error al obtener una sesión por ID:', error);
+        throw error;
+    }
+}
+
+//Actualizar sesion
+export async function actualizarSesion(idSesion, nuevaInfo) {
+    try {
+        const result = await pool.query(
+            `UPDATE sesion SET ? WHERE idSesion = ?`,
+            [nuevaInfo, idSesion]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al actualizar una sesión:', error);
+        throw error;
+    }
+}
+
+//Eliminar sesion
+export async function eliminarSesion(idSesion) {
+    try {
+        const result = await pool.query(
+            `DELETE FROM sesion WHERE idSesion = ?`,
+            [idSesion]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al eliminar una sesión:', error);
+        throw error;
+    }
+}
+
+//Crear rol
+export async function crearRol(rol) {
+    try {
+        const result = await pool.query(
+            `INSERT INTO rol SET ?`,
+            [rol]
+        );
+        return result.insertId;
+    } catch (error) {
+        console.error('Error al crear un rol:', error);
+        throw error;
+    }
+}
+
+//Obtener rol por ID
+export async function getRolPorID(idRol) {
+    try {
+        const [rows] = await pool.query(
+            `SELECT * FROM rol WHERE idRol = ?`,
+            [idRol]
+        );
+        return rows[0];
+    } catch (error) {
+        console.error('Error al obtener un rol por ID:', error);
+        throw error;
+    }
+}
+
+//Actualizar rol
+export async function actualizarRol(idRol, nuevaInfo) {
+    try {
+        const result = await pool.query(
+            `UPDATE rol SET ? WHERE idRol = ?`,
+            [nuevaInfo, idRol]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al actualizar un rol:', error);
+        throw error;
+    }
+}
+
+//Eliminar rol
+export async function eliminarRol(idRol) {
+    try {
+        const result = await pool.query(
+            `DELETE FROM rol WHERE idRol = ?`,
+            [idRol]
+        );
+        return result.affectedRows;
+    } catch (error) {
+        console.error('Error al eliminar un rol:', error);
+        throw error;
+    }
+}
 
 
