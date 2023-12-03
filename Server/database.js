@@ -24,10 +24,6 @@ export async function getMascotaByID(idMascota){
 //getMascotaByID(1);
 
 //Mascotas disponibles para adopcion
-
-
-
-//Agregar una nueva mascota
 export async function getMascotasDisponibles() {
     try {
         const [rows] = await pool.query(
