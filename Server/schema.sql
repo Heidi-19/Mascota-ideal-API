@@ -190,6 +190,70 @@ COMMIT;
 
 -- SELECT * FROM TABLE --
 
+INSERT INTO `mascota` (`idMascota`, `nombre`, `edad`, `peso`, `especie`, `raza`, `caracteristicas`, `antecedentes`, `disponiblilidad`) VALUES ('1', 'Loki', '3', '50.0', 'Canino', 'Labrador', 'Color cafe', 'Callejero', 'No disponible');
+
+INSERT INTO `mascota` (`idMascota`, `nombre`, `edad`, `peso`, `especie`, `raza`, `caracteristicas`, `antecedentes`, `disponiblilidad`) VALUES ('2', 'Garfield', '5', '5.5', 'Felino', 'Gato egipcio', 'Blanco', 'Domestico', 'Disponible');
+
+INSERT INTO `mascota` (`idMascota`, `nombre`, `edad`, `peso`, `especie`, `raza`, `caracteristicas`, `antecedentes`, `disponiblilidad`) VALUES ('3', 'Pepe', '2', '0.200', 'Ave', 'Loro ', 'Color de plumas verde con rojo', 'Domestico', 'No disponible');
+
+INSERT INTO `direccion` (`idDireccion`, `estado`, `ciudad`, `colonia`) VALUES ('1', 'Oaxaca', 'Tlaxiaco', 'Llano Yosovee');
+
+INSERT INTO `direccion` (`idDireccion`, `estado`, `ciudad`, `colonia`) VALUES ('2', 'Oaxaca', 'Huajuapan de Leon', 'El mirador');
+
+INSERT INTO `direccion` (`idDireccion`, `estado`, `ciudad`, `colonia`) VALUES ('3', 'Oaxaca', 'Pinotepa Nacional', 'Centro');
+
+INSERT INTO `sesion` (`idSesion`, `nombreUsuario`, `password`, `email`) VALUES ('1', 'Juan123', 'juanchis', 'juan@outlook.com');
+
+INSERT INTO `sesion` (`idSesion`, `nombreUsuario`, `password`, `email`) VALUES ('2', 'SofiaVR', 'sofia123', 'sofia12@gmail.com');
+
+INSERT INTO `sesion` (`idSesion`, `nombreUsuario`, `password`, `email`) VALUES ('3', 'Jose12SR', 'joselucho', 'joseSVR@gmail.com');
+
+INSERT INTO `usuario` (`idUsuario`, `idRol`, `nombre`, `apellidoPat`, `apellidoMat`, `Edad`, `Sexo`, `idSesion`, `idDireccion`) VALUES ('1', '1', 'Juan', 'Reyes', 'Castro', '28', 'Hombre', '1', '1');
+
+INSERT INTO `usuario` (`idUsuario`, `idRol`, `nombre`, `apellidoPat`, `apellidoMat`, `Edad`, `Sexo`, `idSesion`, `idDireccion`) VALUES ('2', '2', 'Sofia', 'Vazquez', 'Rojas', '18', 'Mujer', '2', '2');
+
+INSERT INTO `usuario` (`idUsuario`, `idRol`, `nombre`, `apellidoPat`, `apellidoMat`, `Edad`, `Sexo`, `idSesion`, `idDireccion`) VALUES ('3', '1', 'Jose', 'Valencia', 'Santiago', '23', 'Hombre', '3', '3');
+
+INSERT INTO `rol` (`idRol`, `responsable`, `adoptante`) VALUES ('1', '1', '1');
+
+
+INSERT INTO `rol` (`idRol`, `responsable`, `adoptante`) VALUES ('2', '1', '2');
+
+INSERT INTO `solicitudesadopcion` (`idSolicitud`, `idMascota`, `idUsuario`, `cantidad`) VALUES ('1', '1', '2', '1');
+
+INSERT INTO `solicitudesadopcion` (`idSolicitud`, `idMascota`, `idUsuario`, `cantidad`) VALUES ('2', '3', '1', '1');
+
+INSERT INTO `solicitudesadopcion` (`idSolicitud`, `idMascota`, `idUsuario`, `cantidad`) VALUES ('3', '2', '3', '1');
+
+
+-- Cambiar tipo de dato en tabla rol--
+
+ALTER TABLE `rol` CHANGE `adoptante` `adoptante` VARCHAR(20) NOT NULL;
+ALTER TABLE `rol` CHANGE `responsable` `responsable` VARCHAR(20) NOT NULL;
+
+--cambiar tipo de dato en tabla adopcionconfirmada--
+
+ALTER TABLE `adopcionconfirmada` CHANGE `realizado` `realizado` VARCHAR(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
+
+ALTER TABLE `rol` CHANGE `responsable` `responsable` VARCHAR(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
+
+ALTER TABLE `rol` CHANGE `adoptante` `adoptante` VARCHAR(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
+
+------------------------------------------------------------------------------------------------------------------------
+
+UPDATE `rol` SET `responsable` = 'responsable', `adoptante` = 'adoptante' WHERE `rol`.`idRol` = 1;
+
+UPDATE `rol` SET `responsable` = 'responsable', `adoptante` = 'adoptante' WHERE `rol`.`idRol` = 2;
+
+UPDATE `adopcionconfirmada` SET `realizado` = 'No realizado' WHERE `adopcionconfirmada`.`idAdopcion` = 1;
+
+INSERT INTO `adopcionconfirmada` (`idAdopcion`, `fecha`, `realizado`, `detalles`, `idSolicitud`) VALUES ('1', '2023-12-03 00:36:14.000000', 'No realizado', 'La mascota fue dada en adopcion anteriormente', '1');
+
+
+INSERT INTO `adopcionconfirmada` (`idAdopcion`, `fecha`, `realizado`, `detalles`, `idSolicitud`) VALUES ('2', '2023-12-03 00:33:54.000000', 'Realizado', 'La adopcion de la mascto fue un éxito', '2');
+
+INSERT INTO `adopcionconfirmada` (`idAdopcion`, `fecha`, `realizado`, `detalles`, `idSolicitud`) VALUES ('3', '2023-12-01 17:37:22', 'No realizado', 'La mascota fue dada en adopcion anteriormente', '3');
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
