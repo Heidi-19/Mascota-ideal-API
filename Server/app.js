@@ -33,16 +33,11 @@ import {
     eliminarAdopcionConfirmada,
 } from "./database.js";
 
-const corsOptions = {
-    origin: "http://127.0.0.1:5173", //specify the allowed origin
-    methods: ["POST","GET"], // specify the allowed method
-    credentials: true, // allow sending credentials (cookies, authentification)
-};
-
 const app = express();
 
 app.use(express.json());
-app.use(cors(corsOptions));
+
+//app.use(cors());
 
 //mostrar mascota por ID
 app.get("/mascota/:idMascota", async(req, res) => {
