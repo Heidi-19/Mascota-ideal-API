@@ -40,9 +40,6 @@ const corsOptions = {
 };
 
 const app = express();
-//const v1Router = require("./v1/Routes/index.js");
-
-//app.use("/api/v1", v1Router);
 
 app.use(express.json());
 app.use(cors(corsOptions));
